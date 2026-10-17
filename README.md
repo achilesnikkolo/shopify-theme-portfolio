@@ -18,6 +18,8 @@ building my development skills on top of that merchant-facing experience.
 
 ## What I've built
 - Customized homepage intro: new heading, description, and background color
+- FAQ section: merchant-editable heading, description, and questions using
+  blocks, with an accessible open/close layout (no JavaScript)
 - More custom sections in progress
 
 ## Local development
