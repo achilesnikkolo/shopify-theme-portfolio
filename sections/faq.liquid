@@ -1,9 +1,7 @@
 <div class="faq">
-  <h2 class="faq__heading">
-    {% if section.settings.heading != blank %}
-      {{ section.settings.heading | escape }}
-    {% endif %}
-  </h2>
+  {% if section.settings.heading != blank %}
+    <h2 class="faq__heading">{{ section.settings.heading | escape }}</h2>
+  {% endif %}
 
   {% if section.settings.description != blank %}
     <div class="faq__description">
@@ -12,9 +10,13 @@
   {% endif %}
 
   {% for block in section.blocks %}
-    <details class="faq__item" {{ block.shopify_attributes }}>
+    <details
+      class="faq__item"
+      {% if section.settings.open_first and forloop.first %}
+      open{% endif %}
+      {{ block.shopify_attributes }}>
       <summary class="faq__question">
-        {{ block.settings.question }}
+        {{ block.settings.question | escape }}
       </summary>
       <div class="faq__answer">
         {{ block.settings.answer }}
@@ -61,6 +63,11 @@
         "id": "description",
         "label": "Description",
         "default": "<p>Here are some of the most common questions we get from our customers.</p>"
+      }, {
+        "type": "checkbox",
+        "id": "open_first",
+        "label": "Open first question by default",
+        "default": false
       }
     ],
     "blocks": [
