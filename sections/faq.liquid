@@ -1,4 +1,4 @@
-<div class="faq">
+<faq-accordion class="faq" data-single-open="{{ section.settings.single_open }}">
   {% if section.settings.heading != blank %}
     <h2 class="faq__heading">{{ section.settings.heading | escape }}</h2>
   {% endif %}
@@ -23,7 +23,7 @@
       </div>
     </details>
   {% endfor %}
-</div>
+</faq-accordion>
 
 {% stylesheet %}
   .faq {
@@ -49,6 +49,39 @@
   }
 {% endstylesheet %}
 
+{% javascript %}
+  class FaqAccordion extends HTMLElement {
+    connectedCallback() {
+
+      if (this.dataset.singleOpen !== 'true') return;
+      
+
+
+      const items = this.querySelectorAll('details');
+
+      items.forEach((item) => {
+        item.addEventListener('toggle', () => {
+          if (!item.open) return;
+          
+
+
+          if (item.open) {
+            items.forEach((other) => {
+              if (other !== item) {
+                other.open = false;
+              }
+            });
+          }
+        });
+      });
+    }
+  }
+
+  if (!customElements.get('faq-accordion')) {
+    customElements.define('faq-accordion', FaqAccordion);
+  }
+{% endjavascript %}
+
 {% schema %}
   {
     "name": "FAQ",
@@ -67,6 +100,11 @@
         "type": "checkbox",
         "id": "open_first",
         "label": "Open first question by default",
+        "default": false
+      }, {
+        "type": "checkbox",
+        "id": "single_open",
+        "label": "Only one question open at a time",
         "default": false
       }
     ],
