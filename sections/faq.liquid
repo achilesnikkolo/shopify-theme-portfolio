@@ -29,14 +29,26 @@
   .faq {
     max-width: 800px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 64px 24px;
+  }
+
+  .faq__heading {
+    margin-bottom: 16px;
+  }
+
+  .faq__description {
+    margin-bottom: 24px;
   }
 
   .faq__item {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    padding: 10px;
+    padding: 16px;
+  }
+
+  .faq__answer {
+    padding: 10px 0;
   }
 
   .faq__question {
@@ -44,8 +56,15 @@
     cursor: pointer;
   }
 
-  .faq__answer {
-    margin-top: 10px;
+
+  @media (max-width: 749px) {
+    .faq {
+      padding: 40px 16px;
+    }
+
+    .faq__item {
+      padding: 14px;
+    }
   }
 {% endstylesheet %}
 
