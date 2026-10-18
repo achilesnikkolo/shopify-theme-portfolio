@@ -21,6 +21,9 @@ building my development skills on top of that merchant-facing experience.
 - FAQ section: merchant-editable heading, description, and questions using
   blocks, with an accessible open/close layout (no JavaScript)
 - More custom sections in progress
+- FAQ section: merchant-editable heading, description, and question blocks,
+  with options to open the first question by default and to allow only one
+  question open at a time (JavaScript custom element)
 
 ## Local development
 1. Install Shopify CLI
