@@ -24,7 +24,10 @@ building my development skills on top of that merchant-facing experience.
 - FAQ section: merchant-editable heading, description, and question blocks,
   with options to open the first question by default and to allow only one
   question open at a time (JavaScript custom element)
-
+- Accessibility and quality: Lighthouse Accessibility score of 100 and zero
+  Theme Check offenses (image alt text, heading order, main landmark,
+  labeled icon links, keyboard focus styles, responsive spacing)
+  
 ## Local development
 1. Install Shopify CLI
 2. Clone this repo
