@@ -1,5 +1,9 @@
 {
   "sections": {
+    "hero": {
+        "type": "hero",
+        "settings": {}
+    },
     "main": {
       "type": "hello-world",
       "settings": {}
@@ -28,5 +32,5 @@
       "block_order": ["question-1", "question-2"]
     }
   },
-  "order": ["main", "faq"]
+  "order": ["hero","main", "faq"]
 }
