@@ -3,6 +3,15 @@
     "hero": {
         "type": "hero",
         "settings": {}
+    },"featured_collection": {
+        "type": "featured-collection",
+        "settings": {
+            "heading": "Our coffees",
+            "collection": "automated-collection",
+            "products_to_show": 4,
+            "columns_desktop": 4,
+            "show_view_all": true
+        }
     },
     "main": {
       "type": "hello-world",
@@ -32,5 +41,5 @@
       "block_order": ["question-1", "question-2"]
     }
   },
-  "order": ["hero","main", "faq"]
+  "order": ["hero","featured_collection","main", "faq"]
 }
