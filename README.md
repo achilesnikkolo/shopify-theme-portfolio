@@ -27,6 +27,8 @@ building my development skills on top of that merchant-facing experience.
 - Accessibility and quality: Lighthouse Accessibility score of 100 and zero
   Theme Check offenses (image alt text, heading order, main landmark,
   labeled icon links, keyboard focus styles, responsive spacing)
+- Hero banner: merchant-editable image, heading, text, and button, with an
+  adjustable overlay, text alignment, and responsive images
   
 ## Local development
 1. Install Shopify CLI
