@@ -1,0 +1,37 @@
+{% comment %}
+  Product card
+  Usage: {% render 'product-card', product: product %}
+{% endcomment %}
+
+<article class="product-card">
+  <a href="{{ product.url }}" class="product-card__link">
+    <div class="product-card__media">
+      {% if product.featured_image != blank %}
+        {{ product.featured_image | image_url: width: 600 | image_tag: widths: '300, 450, 600', sizes: '(min-width: 990px) 25vw, (min-width: 750px) 33vw, 50vw', loading: 'lazy', class: 'product-card__image', alt: product.featured_image.alt | default: product.title
+        }}
+      {% else %}
+        {{ 'product-1' | placeholder_svg_tag: 'product-card__image product-card__placeholder' }}
+      {% endif %}
+
+      {% if product.available == false %}
+        <span class="product-card__badge product-card__badge--sold-out">Sold out</span>
+      {% elsif product.compare_at_price > product.price %}
+        <span class="product-card__badge">Sale</span>
+      {% endif %}
+    </div>
+
+    <h3 class="product-card__title">{{ product.title | escape }}</h3>
+  </a>
+
+  <p class="product-card__price">
+    {% if product.price_varies %}
+      From {{ product.price_min | money }}
+    {% else %}
+      {{ product.price | money }}
+    {% endif %}
+
+    {% if product.compare_at_price > product.price %}
+      <s class="product-card__compare-price">{{ product.compare_at_price | money }}</s>
+    {% endif %}
+  </p>
+</article>
