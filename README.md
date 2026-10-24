@@ -29,6 +29,9 @@ building my development skills on top of that merchant-facing experience.
   labeled icon links, keyboard focus styles, responsive spacing)
 - Hero banner: merchant-editable image, heading, text, and button, with an
   adjustable overlay, text alignment, and responsive images
+- Featured collection: merchant-selected collection in a responsive grid,
+  with a reusable product card snippet, sale and sold-out badges, and
+  placeholder content for empty states
   
 ## Local development
 1. Install Shopify CLI
