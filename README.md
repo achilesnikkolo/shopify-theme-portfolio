@@ -32,7 +32,8 @@ building my development skills on top of that merchant-facing experience.
 - Featured collection: merchant-selected collection in a responsive grid,
   with a reusable product card snippet, sale and sold-out badges, and
   placeholder content for empty states
-  
+- Testimonials: testimonials slider with scroll snap, star ratings, and accessible controls
+
 ## Local development
 1. Install Shopify CLI
 2. Clone this repo
