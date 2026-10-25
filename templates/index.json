@@ -13,6 +13,51 @@
             "show_view_all": true
         }
     },
+    "testimonials": {
+    "type": "testimonials",
+    "settings": {
+        "heading": "What our customers say"
+        },
+        "blocks": {
+            "testimonial-1": {
+            "type": "testimonial",
+            "settings": {
+                "quote": "The best barako I've had outside Batangas. It tastes just like home.",
+                "author": "Maria S.",
+                "location": "Quezon City",
+                "rating": 5
+            }
+            },
+            "testimonial-2": {
+            "type": "testimonial",
+            "settings": {
+                "quote": "The Benguet Arabica is smooth and bright. My new weekend ritual.",
+                "author": "Paolo R.",
+                "location": "Baguio City",
+                "rating": 5
+            }
+            },
+            "testimonial-3": {
+            "type": "testimonial",
+            "settings": {
+                "quote": "Fast delivery and beautiful packaging. The ube latte blend is a treat.",
+                "author": "Carla M.",
+                "location": "Cebu City",
+                "rating": 4
+            }
+            },
+            "testimonial-4": {
+            "type": "testimonial",
+            "settings": {
+                "quote": "Great coffee, and the team helped me pick the right grind for my moka pot.",
+                "author": "Jun D.",
+                "location": "Davao City",
+                "rating": 5
+            }
+            }
+        },
+        "block_order": ["testimonial-1", "testimonial-2", "testimonial-3", "testimonial-4"]
+        },
     "main": {
       "type": "hello-world",
       "settings": {}
@@ -41,5 +86,5 @@
       "block_order": ["question-1", "question-2"]
     }
   },
-  "order": ["hero","featured_collection","main", "faq"]
+  "order": ["hero","featured_collection", "testimonials" ,"main", "faq"]
 }
