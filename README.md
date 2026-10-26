@@ -33,6 +33,7 @@ building my development skills on top of that merchant-facing experience.
   with a reusable product card snippet, sale and sold-out badges, and
   placeholder content for empty states
 - Testimonials: testimonials slider with scroll snap, star ratings, and accessible controls
+- Add to cart: dd product page with variant picker, quantity selector, and AJAX add to cart
 
 ## Local development
 1. Install Shopify CLI
