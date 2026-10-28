@@ -105,7 +105,7 @@ class ProductInfo extends HTMLElement {
           'Content-Type': 'application/json',
           Accept: 'application/json',
         },
-        body: JSON.stringify({ items: [item] }),
+        body: JSON.stringify({ items: [item], sections: 'cart-drawer' }),
       });
 
       const data = await response.json();
@@ -115,14 +115,19 @@ class ProductInfo extends HTMLElement {
         );
       }
 
-      const cartResponse = await fetch(`${this.dataset.cartUrl}.js`, {
-        headers: {
-          Accept: 'application/json',
-        },
-      });
-      const cart = await cartResponse.json();
+      const drawer = document.querySelector('cart-drawer');
 
-      updateCartCount(cart.item_count);
+      if (drawer && data.sections?.['cart-drawer']) {
+        drawer.renderContents(data.sections['cart-drawer']);
+        drawer.open();
+      } else {
+        const cartResponse = await fetch(`${this.dataset.cartUrl}.js`, {
+          headers: { Accept: 'application/json' },
+        });
+        const cart = await cartResponse.json();
+        updateCartCount(cart.item_count);
+      }
+
       this.status.textContent = 'Added to cart.';
     } catch (error) {
       this.status.textContent = error.message;
