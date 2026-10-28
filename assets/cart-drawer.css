@@ -1,0 +1,281 @@
+/* The drawer panel */
+.drawer {
+  width: min(420px, 100%);
+  height: 100dvh;
+  max-width: 100%;
+  max-height: none;
+  margin: 0 0 0 auto;
+  padding: 0;
+  border: 0;
+  background: #ffffff;
+  color: #1f1f1d;
+  transform: translateX(100%);
+  transition:
+    transform 0.3s ease,
+    overlay 0.3s allow-discrete,
+    display 0.3s allow-discrete;
+}
+
+.drawer[open] {
+  transform: translateX(0);
+}
+
+@starting-style {
+  .drawer[open] {
+    transform: translateX(100%);
+  }
+}
+
+/* The dark backdrop behind it */
+.drawer::backdrop {
+  background: rgb(0 0 0 / 0);
+  transition:
+    background 0.3s ease,
+    overlay 0.3s allow-discrete,
+    display 0.3s allow-discrete;
+}
+
+.drawer[open]::backdrop {
+  background: rgb(0 0 0 / 0.4);
+}
+
+@starting-style {
+  .drawer[open]::backdrop {
+    background: rgb(0 0 0 / 0);
+  }
+}
+
+/* Stop the page behind from scrolling while the drawer is open */
+html:has(.drawer[open]) {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer,
+  .drawer::backdrop {
+    transition: none;
+  }
+}
+
+/* Layout inside the drawer */
+.drawer__inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.drawer__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e5e3db;
+}
+
+.drawer__title {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.drawer__title:focus {
+  outline: none;
+}
+
+.drawer__close {
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.drawer__close:hover {
+  background: #f1efe8;
+}
+
+.drawer__contents {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  transition: opacity 0.2s;
+}
+
+.drawer__contents.is-busy {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.drawer__items {
+  flex: 1;
+  margin: 0;
+  padding: 0 24px;
+  overflow-y: auto;
+  list-style: none;
+}
+
+/* One item */
+.drawer-item {
+  display: grid;
+  grid-template-columns: 80px minmax(0, 1fr);
+  gap: 16px;
+  padding: 20px 0;
+  border-bottom: 1px solid #f1efe8;
+}
+
+.drawer-item__image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 10px;
+  background: #f1efe8;
+}
+
+.drawer-item__placeholder {
+  fill: #b4b2a9;
+}
+
+.drawer-item__title {
+  color: inherit;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.drawer-item__title:hover {
+  text-decoration: underline;
+}
+
+.drawer-item__variant,
+.drawer-item__price {
+  margin: 4px 0 0;
+  color: #5f5e5a;
+  font-size: 0.9375rem;
+}
+
+.drawer-item__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.drawer-quantity {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #b4b2a9;
+  border-radius: 10px;
+}
+
+.drawer-quantity__button {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 1.125rem;
+  cursor: pointer;
+}
+
+.drawer-quantity__button:hover {
+  background: #f1efe8;
+}
+
+.drawer-quantity__value {
+  min-width: 32px;
+  text-align: center;
+}
+
+.drawer-item__remove {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #5f5e5a;
+  font: inherit;
+  font-size: 0.875rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Footer */
+.drawer__footer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px 24px;
+  border-top: 1px solid #e5e3db;
+}
+
+.drawer__subtotal {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.drawer__note {
+  margin: 0;
+  color: #5f5e5a;
+  font-size: 0.875rem;
+}
+
+.drawer__checkout {
+  display: block;
+  width: 100%;
+  padding: 16px 24px;
+  border: 0;
+  border-radius: 999px;
+  background: #0f6e56;
+  color: #ffffff;
+  font: inherit;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.drawer__checkout:hover {
+  background: #085041;
+}
+
+.drawer__view-cart {
+  color: inherit;
+  text-align: center;
+}
+
+.drawer__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.drawer__close:focus-visible,
+.drawer-quantity__button:focus-visible,
+.drawer-item__remove:focus-visible,
+.drawer-item__title:focus-visible,
+.drawer__checkout:focus-visible,
+.drawer__view-cart:focus-visible {
+  outline: 2px solid #0f6e56;
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}

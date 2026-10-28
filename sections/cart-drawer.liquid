@@ -1,0 +1,117 @@
+{{ 'cart-drawer.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'cart-drawer.js' | asset_url }}" defer></script>
+
+<cart-drawer data-cart-change-url="{{ routes.cart_change_url }}">
+  <dialog class="drawer" aria-labelledby="CartDrawer-Title">
+    <div class="drawer__inner">
+      <div class="drawer__header">
+        <h2
+          id="CartDrawer-Title"
+          class="drawer__title"
+          tabindex="-1">Your cart</h2>
+        <button
+          type="button"
+          class="drawer__close"
+          data-drawer-close
+          aria-label="Close cart">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+
+      <p
+        class="visually-hidden"
+        role="status"
+        data-drawer-status></p>
+
+      <div
+        class="drawer__contents"
+        id="CartDrawer-Contents"
+        data-count="{{ cart.item_count }}">
+        {% if cart.item_count > 0 %}
+          <ul class="drawer__items" role="list">
+            {% for item in cart.items %}
+              <li class="drawer-item">
+                <a
+                  href="{{ item.url }}"
+                  class="drawer-item__media"
+                  tabindex="-1"
+                  aria-hidden="true">
+                  {% if item.image %}
+                    {{ item.image | image_url: width: 160 | image_tag: widths: '80, 160', sizes: '80px', loading: 'lazy', class: 'drawer-item__image', alt: ''
+                    }}
+                  {% else %}
+                    {{ 'product-1' | placeholder_svg_tag: 'drawer-item__image drawer-item__placeholder' }}
+                  {% endif %}
+                </a>
+
+                <div class="drawer-item__details">
+                  <a href="{{ item.url }}" class="drawer-item__title">{{ item.product.title | escape }}</a>
+                  {% unless item.product.has_only_default_variant %}
+                    <p class="drawer-item__variant">{{ item.variant.title | escape }}</p>
+                  {% endunless %}
+                  <p class="drawer-item__price">{{ item.final_line_price | money }}</p>
+
+                  <div class="drawer-item__actions">
+                    <div class="drawer-quantity">
+                      <button
+                        type="button"
+                        class="drawer-quantity__button"
+                        data-line="{{ forloop.index }}"
+                        data-quantity="{{ item.quantity | minus: 1 }}"
+                        data-focus-key="minus-{{ forloop.index }}"
+                        aria-label="Decrease quantity of {{ item.product.title | escape }}">−</button>
+                      <span class="drawer-quantity__value">
+                        <span class="visually-hidden">Quantity:</span>
+                        {{ item.quantity }}
+                      </span>
+                      <button
+                        type="button"
+                        class="drawer-quantity__button"
+                        data-line="{{ forloop.index }}"
+                        data-quantity="{{ item.quantity | plus: 1 }}"
+                        data-focus-key="plus-{{ forloop.index }}"
+                        aria-label="Increase quantity of {{ item.product.title | escape }}">+</button>
+                    </div>
+
+                    <button
+                      type="button"
+                      class="drawer-item__remove"
+                      data-line="{{ forloop.index }}"
+                      data-quantity="0">
+                      Remove<span class="visually-hidden">
+                        {{ item.product.title | escape }}</span>
+                    </button>
+                  </div>
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+
+          <div class="drawer__footer">
+            <p class="drawer__subtotal">
+              <span>Subtotal</span>
+              <span>{{ cart.total_price | money }}</span>
+            </p>
+            <p class="drawer__note">Taxes and shipping calculated at checkout.</p>
+            <form action="{{ routes.cart_url }}" method="post">
+              <button
+                type="submit"
+                name="checkout"
+                class="drawer__checkout">Check out</button>
+            </form>
+            <a href="{{ routes.cart_url }}" class="drawer__view-cart">View cart</a>
+          </div>
+        {% else %}
+          <div class="drawer__empty">
+            <p>Your cart is empty.</p>
+            <a href="{{ routes.all_products_collection_url }}" class="drawer__checkout">Continue shopping</a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </dialog>
+</cart-drawer>
+
+{% schema %}
+  {"name": "Cart drawer"}
+{% endschema %}
