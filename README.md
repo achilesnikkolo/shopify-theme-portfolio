@@ -34,7 +34,10 @@ building my development skills on top of that merchant-facing experience.
   placeholder content for empty states
 - Testimonials: testimonials slider with scroll snap, star ratings, and accessible controls
 - Add to cart: dd product page with variant picker, quantity selector, and AJAX add to cart
-
+- Cart drawer: slides in after adding to cart, with quantity updates and removal
+  via the Cart API, re-rendered with the Section Rendering API, built on the
+  native dialog element for focus trapping, Escape to close, and accessibility
+  
 ## Local development
 1. Install Shopify CLI
 2. Clone this repo
