@@ -20,6 +20,12 @@
         "default": "work_sans_n4",
         "label": "t:general.primary"
       },
+      {
+        "type": "font_picker",
+        "id": "type_heading_font",
+        "default": "work_sans_n6",
+        "label": "Headings"
+      }
     ]
   },
   {
@@ -59,14 +65,58 @@
       {
         "type": "color",
         "id": "background_color",
-        "default": "#FFFFFF",
+        "default": "#FFF8EC",
         "label": "t:labels.background"
       },
       {
         "type": "color",
         "id": "foreground_color",
-        "default": "#333333",
+        "default": "#3B2418",
         "label": "t:labels.foreground"
+      },
+      {
+        "type": "header",
+        "content": "Brand colors"
+      },
+      {
+        "type": "color",
+        "id": "accent_color",
+        "default": "#6B3FA0",
+        "label": "Accent (buttons and links)"
+      },
+      {
+        "type": "color",
+        "id": "accent_contrast_color",
+        "default": "#FFFFFF",
+        "label": "Text on accent"
+      },
+      {
+        "type": "color",
+        "id": "highlight_color",
+        "default": "#FFC93C",
+        "label": "Highlight (badges)"
+      },
+      {
+        "type": "color",
+        "id": "highlight_contrast_color",
+        "default": "#3B2418",
+        "label": "Text on highlight"
+      },
+      {
+        "type": "color",
+        "id": "secondary_color",
+        "default": "#E8743B",
+        "label": "Secondary accent"
+      },
+      {
+        "type": "color",
+        "id": "surface_color",
+        "default": "#FFFFFF",
+        "label": "Cards and panels"
+      },
+      {
+        "type": "header",
+        "content": "Corners"
       },
       {
         "type": "range",
@@ -77,6 +127,16 @@
         "unit": "px",
         "label": "t:labels.input_corner_radius",
         "default": 4
+      },
+      {
+        "type": "range",
+        "id": "button_corner_radius",
+        "min": 0,
+        "max": 30,
+        "step": 2,
+        "unit": "px",
+        "label": "Button corner radius",
+        "default": 30
       }
     ]
   }

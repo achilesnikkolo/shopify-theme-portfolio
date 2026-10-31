@@ -1,18 +1,44 @@
 {% style %}
-  {% # Loads all font variantions with display: swap %}
-  {{ settings.type_primary_font | font_face: font_display: 'swap' }}
-  {{ settings.type_primary_font | font_modify: 'weight', 'bold' | font_face: font_display: 'swap' }}
-  {{ settings.type_primary_font | font_modify: 'weight', 'bold' | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}
-  {{ settings.type_primary_font | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}
-
-  :root {
-    --font-primary--family: {{ settings.type_primary_font.family }}, {{ settings.type_primary_font.fallback_families }};
+  {% # Body font, with bold and italic variations %}{{ settings.type_primary_font | font_face: font_display: 'swap' }}{{ settings.type_primary_font | font_modify: 'weight', 'bold' | font_face: font_display: 'swap' }}{{ settings.type_primary_font | font_modify: 'weight', 'bold' | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}{{ settings.type_primary_font | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}{% # Heading font %}{{ settings.type_heading_font | font_face: font_display: 'swap' }}:root {
+    --font-primary--family: {{ settings.type_primary_font.family }}, 
+    {{ settings.type_primary_font.fallback_families }};
     --font-primary--style: {{ settings.type_primary_font.style }};
     --font-primary--weight: {{ settings.type_primary_font.weight }};
+
+    --font-heading--family: {{ settings.type_heading_font.family }}, 
+    {{ settings.type_heading_font.fallback_families }};
+    --font-heading--style: {{ settings.type_heading_font.style }};
+    --font-heading--weight: {{ settings.type_heading_font.weight }};
+
     --page-width: {{ settings.max_page_width }};
     --page-margin: {{ settings.min_page_margin }}px;
+
     --color-background: {{ settings.background_color }};
     --color-foreground: {{ settings.foreground_color }};
+    --color-accent: {{ settings.accent_color }};
+    --color-accent-contrast: {{ settings.accent_contrast_color }};
+    --color-highlight: {{ settings.highlight_color }};
+    --color-highlight-contrast: {{ settings.highlight_contrast_color }};
+    --color-secondary: {{ settings.secondary_color }};
+    --color-surface: {{ settings.surface_color }};
+
+    
+    {% # Colors calculated from the brand colors %}
+    --color-accent-hover: color-mix(in srgb, var(--color-accent) 85%, black);
+    --color-muted: color-mix(in srgb, var(--color-foreground) 70%, var(--color-background));
+    --color-border: color-mix(in srgb, var(--color-foreground) 15%, var(--color-background));
+    --color-subtle: color-mix(in srgb, var(--color-foreground) 5%, var(--color-background));
+
     --style-border-radius-inputs: {{ settings.input_corner_radius }}px;
+    --style-border-radius-buttons: {{ settings.button_corner_radius }}px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-heading--family);
+    font-style: var(--font-heading--style);
+    font-weight: var(--font-heading--weight);
   }
 {% endstyle %}
