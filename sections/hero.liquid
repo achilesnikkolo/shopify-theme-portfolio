@@ -87,17 +87,34 @@
 
   .hero__button {
     display: inline-block;
-    padding: 12px 24px;
-    border-radius: 999px;
-    background: #ffffff;
-    color: #1f1f1d;
+    padding: 14px 28px;
+    border-radius: var(--style-border-radius-buttons);
+    background: var(--color-accent);
+    color: var(--color-accent-contrast);
     font-weight: 600;
     text-decoration: none;
+    transition: background 0.2s
+    , transform 0.2s;
+  }
+
+  .hero__button:hover {
+    background: var(--color-accent-hover);
+    transform: translateY(-2px);
   }
 
   .hero__button:focus-visible {
     outline: 2px solid #ffffff;
     outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__button {
+      transition: none;
+    }
+
+    .hero__button:hover {
+      transform: none;
+    }
   }
 {% endstylesheet %}
 
