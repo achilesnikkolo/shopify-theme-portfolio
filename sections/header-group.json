@@ -13,10 +13,23 @@
   "sections": {
     "header": {
       "type": "header",
-      "settings": {}
+      "settings": {
+        "logo_width": 140,
+        "menu": "main-menu",
+        "sticky": true
+      }
+    },
+    "announcement_bar_dpDNEi": {
+      "type": "announcement-bar",
+      "name": "Announcement bar",
+      "settings": {
+        "text": "Free shipping on orders over ₱1,500",
+        "link": ""
+      }
     }
   },
   "order": [
+    "announcement_bar_dpDNEi",
     "header"
-  ],
+  ]
 }
