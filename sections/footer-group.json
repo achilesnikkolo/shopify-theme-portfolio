@@ -13,8 +13,36 @@
   "sections": {
     "footer": {
       "type": "footer",
+      "blocks": {
+        "link_column_LA7yPp": {
+          "type": "link_column",
+          "settings": {
+            "heading": "Help",
+            "menu": "footer-help"
+          }
+        },
+        "link_column_ACXQt7": {
+          "type": "link_column",
+          "settings": {
+            "heading": "Shop",
+            "menu": "footer-shop"
+          }
+        }
+      },
+      "block_order": [
+        "link_column_LA7yPp",
+        "link_column_ACXQt7"
+      ],
       "settings": {
-        "menu": "",
+        "tagline": "Coffee from across the islands.",
+        "description": "Small-batch Filipino coffee, from bold Batangas barako to bright Benguet Arabica.",
+        "social_instagram": "",
+        "social_tiktok": "",
+        "social_facebook": "",
+        "show_newsletter": true,
+        "newsletter_heading": "Join the Akipelago club",
+        "newsletter_text": "New roasts, merienda pairings, and member-only treats, straight to your inbox.",
+        "menu": "footer",
         "show_payment_icons": true
       }
     }
