@@ -1,0 +1,161 @@
+{{ 'origins.css' | asset_url | stylesheet_tag }}
+
+<section class="origins" aria-labelledby="Origins-{{ section.id }}">
+  <div class="origins__inner">
+    <div class="origins__intro">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="origins__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+
+      <h2 id="Origins-{{ section.id }}" class="origins__heading">
+        {{ section.settings.heading | escape }}
+      </h2>
+
+      {%- if section.settings.text != blank -%}
+        <div class="origins__text">{{ section.settings.text }}</div>
+      {%- endif -%}
+
+      {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+        <a href="{{ section.settings.button_link }}" class="origins__button">
+          {{ section.settings.button_label | escape }}
+        </a>
+      {%- endif -%}
+    </div>
+
+    <ul class="origins__list" role="list">
+      {%- for block in section.blocks -%}
+        <li class="origin-card origin-card--{{ block.settings.island_group }}" {{ block.shopify_attributes }}>
+          <div class="origin-card__media">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 800 | image_tag: widths: '400, 600, 800', sizes: '(min-width: 990px) 22vw, (min-width: 750px) 45vw, 90vw', loading: 'lazy', class: 'origin-card__image', alt: block.settings.image.alt
+              }}
+            {%- else -%}
+              {{ 'lifestyle-1' | placeholder_svg_tag: 'origin-card__image origin-card__placeholder' }}
+            {%- endif -%}
+            <span class="origin-card__island">{{ block.settings.island_group | capitalize }}</span>
+          </div>
+
+          <div class="origin-card__body">
+            <h3 class="origin-card__region">{{ block.settings.region | escape }}</h3>
+
+            {%- if block.settings.variety != blank -%}
+              <p class="origin-card__variety">{{ block.settings.variety | escape }}</p>
+            {%- endif -%}
+
+            {%- if block.settings.notes != blank -%}
+              {%- assign notes = block.settings.notes | split: ',' -%}
+              <ul
+                class="origin-card__notes"
+                role="list"
+                aria-label="Tasting notes">
+                {%- for note in notes -%}
+                  <li>{{ note | strip | escape }}</li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+          </div>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Our origins",
+    "settings": [
+      {
+        "type": "text",
+        "id": "eyebrow",
+        "label": "Eyebrow",
+        "default": "Our origins"
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "From island to cup"
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text",
+        "default": "<p>The Philippines has over 7,000 islands, and some of the world's most distinctive coffee. Akipelago brings it together, one region at a time.</p>"
+      },
+      {
+        "type": "text",
+        "id": "button_label",
+        "label": "Button label",
+        "default": "Shop the collection"
+      }, {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button link"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "origin",
+        "name": "Origin",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "region",
+            "label": "Region",
+            "default": "Region name"
+          },
+          {
+            "type": "select",
+            "id": "island_group",
+            "label": "Island group",
+            "options": [
+              {
+                "value": "luzon",
+                "label": "Luzon"
+              }, {
+                "value": "visayas",
+                "label": "Visayas"
+              }, {
+                "value": "mindanao",
+                "label": "Mindanao"
+              }
+            ],
+            "default": "luzon"
+          },
+          {
+            "type": "text",
+            "id": "variety",
+            "label": "Coffee variety",
+            "default": "Arabica"
+          }, {
+            "type": "text",
+            "id": "notes",
+            "label": "Tasting notes",
+            "info": "Separate notes with commas, like: Bold, Smoky, Dark chocolate",
+            "default": "Bright, Citrus, Floral"
+          }
+        ]
+      }
+    ],
+    "max_blocks": 6,
+    "presets": [
+      {
+        "name": "Our origins",
+        "blocks": [
+          {
+            "type": "origin"
+          }, {
+            "type": "origin"
+          }, {
+            "type": "origin"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
