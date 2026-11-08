@@ -27,6 +27,7 @@
         class="drawer__contents"
         id="CartDrawer-Contents"
         data-count="{{ cart.item_count }}">
+        {% render 'free-shipping-bar' %}
         {% if cart.item_count > 0 %}
           <ul class="drawer__items" role="list">
             {% for item in cart.items %}
