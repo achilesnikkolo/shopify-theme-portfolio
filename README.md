@@ -37,6 +37,11 @@ building my development skills on top of that merchant-facing experience.
 - Cart drawer: slides in after adding to cart, with quantity updates and removal
   via the Cart API, re-rendered with the Section Rendering API, built on the
   native dialog element for focus trapping, Escape to close, and accessibility
+- Collection page: AJAX filtering with the Section Rendering API (size, grind,
+  price, availability), sorting, removable filter pills, pagination, and URL
+  history support, with a no-JavaScript fallback
+- Coffee catalog: products with Size and Grind variants, automated collections,
+  and a shared product card stylesheet
   
 ## Local development
 1. Install Shopify CLI
