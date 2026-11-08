@@ -1,5 +1,6 @@
 {{ 'product.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'product.js' | asset_url }}" defer></script>
+<script src="{{ 'sticky-add-to-cart.js' | asset_url }}" defer></script>
 
 {% liquid
   assign current_variant = product.selected_or_first_available_variant
@@ -137,6 +138,21 @@
   <script type="application/json" data-variants>
     {{ product.variants | json }}
   </script>
+
+  <sticky-add-to-cart class="sticky-atc" hidden>
+    <div class="sticky-atc__info">
+      <p class="sticky-atc__title">{{ product.title | escape }}</p>
+      <p class="sticky-atc__price" data-sticky-price>{{ current_variant.price | money }}</p>
+    </div>
+    <button
+      type="button"
+      class="sticky-atc__button"
+      data-sticky-button
+      {% unless current_variant.available %}disabled{% endunless %}
+    >
+      {% if current_variant.available %}Add to cart{% else %}Sold out{% endif %}
+    </button>
+  </sticky-add-to-cart>
 </product-info>
 
 
