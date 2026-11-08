@@ -1,0 +1,36 @@
+{%- comment -%}
+  Free shipping progress bar
+  Usage: {% render 'free-shipping-bar' %}
+{%- endcomment -%}
+
+{%- if settings.show_free_shipping_bar and settings.free_shipping_threshold > 0 -%}
+  {%- liquid
+    assign threshold = settings.free_shipping_threshold | times: 100
+    assign total = cart.total_price
+    assign remaining = threshold | minus: total
+    assign percent = total | times: 100 | divided_by: threshold
+    if percent > 100
+      assign percent = 100
+    endif
+  -%}
+
+  <div class="free-shipping{% if remaining <= 0 %} is-unlocked{% endif %}">
+    <p class="free-shipping__message">
+      {%- if remaining <= 0 -%}
+        <span aria-hidden="true">🎉</span>
+        You've unlocked free shipping!
+      {%- elsif cart.item_count == 0 -%}
+        Free shipping on orders over {{ threshold | money_without_trailing_zeros }}
+      {%- else -%}
+        You're
+        <strong>{{ remaining | money }}</strong>
+        away from free shipping
+      {%- endif -%}
+    </p>
+    <progress
+      class="free-shipping__bar"
+      max="100"
+      value="{{ percent }}"
+      aria-label="Progress toward free shipping"></progress>
+  </div>
+{%- endif -%}

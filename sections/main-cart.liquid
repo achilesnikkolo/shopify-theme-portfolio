@@ -2,7 +2,7 @@
 
 <section class="cart">
   <h1 class="cart__title">Your cart</h1>
-
+  {% render 'free-shipping-bar' %}
   {% if cart.item_count > 0 %}
     <form
       action="{{ routes.cart_url }}"

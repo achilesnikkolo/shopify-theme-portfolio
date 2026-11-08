@@ -139,5 +139,23 @@
         "default": 30
       }
     ]
-  }
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_free_shipping_bar",
+        "label": "Show free shipping progress",
+        "default": true
+      },
+      {
+        "type": "number",
+        "id": "free_shipping_threshold",
+        "label": "Free shipping threshold",
+        "info": "Order total for free shipping, in your store's currency. Example: 1500",
+        "default": 1500
+      }
+    ]
+  }  
 ]
