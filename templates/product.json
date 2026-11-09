@@ -12,9 +12,14 @@
     "main": {
       "type": "main-product",
       "settings": {}
+    },
+    "recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "heading": "You may also like",
+        "products_to_show": 4
+      }
     }
   },
-  "order": [
-    "main"
-  ]
+  "order": ["main", "recommendations"]
 }
