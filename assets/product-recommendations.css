@@ -1,0 +1,49 @@
+.recommendations {
+  display: block;
+  min-height: 1px;
+}
+
+.recommendations__inner {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: 48px var(--page-margin) 72px;
+  border-top: 1px solid var(--color-border);
+}
+
+.recommendations__heading {
+  margin: 0 0 24px;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+.recommendations__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 990px) {
+  .recommendations__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Fade in gently once loaded */
+.recommendations.is-loaded .recommendations__inner {
+  animation: recommendations-in 0.5s ease both;
+}
+
+@keyframes recommendations-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .recommendations.is-loaded .recommendations__inner {
+    animation: none;
+  }
+}
