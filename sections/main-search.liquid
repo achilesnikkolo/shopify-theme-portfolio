@@ -1,0 +1,103 @@
+{{ 'product-card.css' | asset_url | stylesheet_tag }}
+{{ 'collection.css' | asset_url | stylesheet_tag }}
+{{ 'search.css' | asset_url | stylesheet_tag }}
+
+{%- paginate search.results by section.settings.results_per_page -%}
+  <section class="collection search-page">
+    <header class="collection__header">
+      <h1 class="collection__title">
+        {%- if search.performed -%}
+          Results for "{{ search.terms | escape }}"
+        {%- else -%}
+          Search
+        {%- endif -%}
+      </h1>
+
+      <form action="{{ routes.search_url }}" method="get" role="search" class="search-page__form">
+        <label for="SearchPage-{{ section.id }}" class="visually-hidden">Search Akipelago</label>
+        <input
+          id="SearchPage-{{ section.id }}"
+          class="search-page__input"
+          type="search"
+          name="q"
+          value="{{ search.terms | escape }}"
+          placeholder="Search coffees…"
+        >
+        <button type="submit" class="search-page__button">Search</button>
+      </form>
+
+      {%- if search.performed -%}
+        <p class="collection__count">
+          {{ search.results_count }} {{ search.results_count | pluralize: 'result', 'results' }}
+        </p>
+      {%- endif -%}
+    </header>
+
+    {%- if search.performed -%}
+      {%- if search.results_count > 0 -%}
+        <ul class="collection__grid" role="list">
+          {%- for item in search.results -%}
+            <li>
+              {%- if item.object_type == 'product' -%}
+                {% render 'product-card', product: item %}
+              {%- else -%}
+                <a href="{{ item.url }}" class="search-page__result">
+                  <span class="search-page__type">{{ item.object_type | capitalize }}</span>
+                  <span class="search-page__result-title">{{ item.title | escape }}</span>
+                </a>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+
+        {%- if paginate.pages > 1 -%}
+          <nav class="pagination" aria-label="Pagination">
+            <ul class="pagination__list" role="list">
+              {%- if paginate.previous -%}
+                <li><a href="{{ paginate.previous.url }}" class="pagination__link" aria-label="Previous page">←</a></li>
+              {%- endif -%}
+              {%- for part in paginate.parts -%}
+                {%- if part.is_link -%}
+                  <li><a href="{{ part.url }}" class="pagination__link">{{ part.title }}</a></li>
+                {%- elsif part.title == paginate.current_page -%}
+                  <li><span class="pagination__link is-current" aria-current="page">{{ part.title }}</span></li>
+                {%- else -%}
+                  <li><span class="pagination__gap">{{ part.title }}</span></li>
+                {%- endif -%}
+              {%- endfor -%}
+              {%- if paginate.next -%}
+                <li><a href="{{ paginate.next.url }}" class="pagination__link" aria-label="Next page">→</a></li>
+              {%- endif -%}
+            </ul>
+          </nav>
+        {%- endif -%}
+
+      {%- else -%}
+        <div class="collection__empty">
+          <p>No results for "{{ search.terms | escape }}."</p>
+          <p class="search-page__hint">
+            Try "barako" or "ube," or browse
+            <a href="{{ routes.all_products_collection_url }}" class="collection__empty-link">all coffees</a>.
+          </p>
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+  </section>
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "Search results",
+  "settings": [
+    {
+      "type": "range",
+      "id": "results_per_page",
+      "min": 4,
+      "max": 24,
+      "step": 4,
+      "label": "Results per page",
+      "default": 12
+    }
+  ]
+}
+{% endschema %}
