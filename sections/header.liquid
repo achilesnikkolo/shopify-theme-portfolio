@@ -1,5 +1,5 @@
 {{ 'header.css' | asset_url | stylesheet_tag }}
-
+<script src="{{ 'predictive-search.js' | asset_url }}" defer></script>
 <header class="site-header{% if section.settings.sticky %} site-header--sticky{% endif %}" style="--logo-width: {{ section.settings.logo_width }}px;">
   <div class="site-header__inner">
     <a href="{{ routes.root_url }}" class="site-header__logo">
@@ -27,6 +27,17 @@
     </nav>
 
     <div class="site-header__icons">
+        <button
+        type="button"
+        class="site-header__icon"
+        popovertarget="Search-{{ section.id }}"
+        aria-label="Search"
+        >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"></circle>
+            <path d="M20 20l-4-4"></path>
+        </svg>
+        </button>       
       {%- if shop.customer_accounts_enabled -%}
         <a
           href="{{ routes.account_url }}"
@@ -90,6 +101,36 @@
       {%- endfor -%}
     </ul>
   </nav>
+  <div id="Search-{{ section.id }}" class="search-panel" popover>
+    <predictive-search
+      class="search-panel__inner"
+      data-search-url="{{ routes.predictive_search_url }}"
+    >
+      <form action="{{ routes.search_url }}" method="get" role="search" class="search-panel__form">
+        <label for="SearchInput-{{ section.id }}" class="visually-hidden">Search Akipelago</label>
+        <input
+          id="SearchInput-{{ section.id }}"
+          class="search-panel__input"
+          type="search"
+          name="q"
+          placeholder="Search coffees…"
+          autocomplete="off"
+          autofocus
+        >
+        <button
+          type="button"
+          class="site-header__icon"
+          popovertarget="Search-{{ section.id }}"
+          popovertargetaction="hide"
+          aria-label="Close search"
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+      </form>
+
+      <div class="search-panel__results" data-predictive-results></div>
+    </predictive-search>
+  </div>
 </header>
 
 {% schema %}
