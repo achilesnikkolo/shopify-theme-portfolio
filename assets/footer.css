@@ -207,3 +207,9 @@
   white-space: nowrap;
   border: 0;
 }
+
+@media screen and (max-width: 459px) {
+  .newsletter-form__field {
+    width: 250px;
+  }
+}
